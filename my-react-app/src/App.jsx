@@ -7,6 +7,8 @@ import IndustryFocus from "./components/IndustryFocus";
 import WhyAiriv from "./components/WhyAiriv";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import CoreCapabilities from "./components/CoreCapabilities";
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
       <Services />
       <IndustryFocus />
       <WhyAiriv />
+      <CoreCapabilities />
       <Contact />
       <Footer />
     </>
