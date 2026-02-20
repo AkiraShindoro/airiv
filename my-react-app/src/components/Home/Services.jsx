@@ -1,8 +1,8 @@
-import s1 from "../assets/service.svg";
-import s2 from "../assets/service-2.svg";
-import s3 from "../assets/service-3.svg";
-import s4 from "../assets/service-4.svg";
-import s5 from "../assets/service-5.svg";
+import s1 from "../../assets/service.svg";
+import s2 from "../../assets/service-2.svg";
+import s3 from "../../assets/service-3.svg";
+import s4 from "../../assets/service-4.svg";
+import s5 from "../../assets/service-5.svg";
 
 function Services() {
   const items = [

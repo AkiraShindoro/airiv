@@ -1,4 +1,4 @@
-import Herosection from "../assets/Hero Section.svg";
+import Herosection from "../../assets/Hero Section.svg";
 
 function Hero() {
   return (

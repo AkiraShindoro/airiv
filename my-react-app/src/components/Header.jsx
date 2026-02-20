@@ -1,17 +1,20 @@
+
+import { Link } from "react-router-dom";
 import logoPic from "../assets/logo.svg";
 
 function Header() {
   return (
     <header style={styles.header}>
-      <div style={styles.logo}>
-        <img src={logoPic} alt="Airiv Infotech" style={styles.logoImage} />
-      </div>
+      <Link to="/">
+        <img src={logoPic} alt="Logo" style={styles.logo} />
+      </Link>
 
       <nav style={styles.nav}>
-        <a href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-        <a href="#services">SERVICES</a>
-        <a href="#contact">CONTACT</a>
+        <Link to="/" style={styles.link}>HOME</Link>
+        <Link to="/industries" style={styles.link}>INDUSTRIES</Link>
+        <Link to="/about" style={styles.link}>ABOUT</Link>
+        <Link to="/services" style={styles.link}>SERVICES</Link>
+        <Link to="/contact" style={styles.link}>CONTACT</Link>
       </nav>
     </header>
   );
@@ -19,25 +22,28 @@ function Header() {
 
 const styles = {
   header: {
-    position: "absolute",
+    position: "fixed",
     top: 0,
     width: "100%",
     padding: "20px 60px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    color: "#fff",
-    zIndex: 10,
+    background: "#0b2a5c",
+    zIndex: 1000,
   },
   logo: {
-    fontWeight: "700",
-    fontSize: "20px",
     height: "40px",
   },
   nav: {
     display: "flex",
     gap: "30px",
+  },
+  link: {
+    color: "#fff",
+    textDecoration: "none",
     fontSize: "14px",
+    fontWeight: "500",
   },
 };
 

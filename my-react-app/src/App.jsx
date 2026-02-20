@@ -1,29 +1,21 @@
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import WhatWeDo from "./components/WhatWeDo";
-import Services from "./components/Services";
-import IndustryFocus from "./components/IndustryFocus";
-import WhyAiriv from "./components/WhyAiriv";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import CoreCapabilities from "./components/CoreCapabilities";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Industries from "./pages/Industries";
+import Services from "./pages/Services";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Hero />
-      <About />
-      <WhatWeDo />
-      <Services />
-      <IndustryFocus />
-      <WhyAiriv />
-      <CoreCapabilities />
-      <Contact />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/industries" element={<Industries />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
