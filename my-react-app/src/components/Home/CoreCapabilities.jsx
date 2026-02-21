@@ -1,32 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import aiImg from "../../assets/core/img1.png";
-import cloudImg from "../../assets/core/img2.png";
-import enterpriseImg from "../../assets/core/img3.png";
-import qaImg from "../../assets/core/img4.png";
-import talentImg from "../../assets/core/img5.png";
+import bgImg from "../../assets/core/core capability bg.jpg";
+
+import aiImg from "../../assets/core/img1.jpg";
+import cloudImg from "../../assets/core/img2.jpg";
+import enterpriseImg from "../../assets/core/img3.jpg";
+import qaImg from "../../assets/core/img4.jpg";
+import talentImg from "../../assets/core/img5.jpg";
 
 function CoreCapabilities() {
-  const sectionRef = useRef();
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      const visible = windowHeight - rect.top;
-      const total = rect.height + windowHeight;
-
-      const percent = Math.min(Math.max(visible / total, 0), 1);
-      setProgress(percent);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const sectionsRef = useRef([]);
+  const [visibleIndex, setVisibleIndex] = useState(null);
 
   const cards = [
     { title: "Artificial Intelligence & Data Analytics", img: aiImg },
@@ -36,30 +19,134 @@ function CoreCapabilities() {
     { title: "Talent & Delivery Services", img: talentImg },
   ];
 
+  const alignmentPattern = ["left", "center", "right", "center", "left"];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.dataset.index);
+
+          if (entry.isIntersecting) {
+            setVisibleIndex(index);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    sectionsRef.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section ref={sectionRef} className="core-section">
-      <h2 className="core-heading">OUR CORE CAPABILITIES</h2>
+    <section
+      style={{
+        ...styles.wrapper,
+        backgroundImage: `url(${bgImg})`,
+      }}
+    >
+      <h2 style={styles.heading}>OUR CORE CAPABILITIES</h2>
 
-      <div className="core-container">
-        {cards.map((card, index) => {
-          const threshold = (index + 1) / cards.length;
-          const show = progress > threshold;
+      {cards.map((card, index) => {
+        const alignment = alignmentPattern[index];
+        const isVisible = visibleIndex === index;
 
-          return (
+        return (
+          <div
+            key={index}
+            ref={(el) => (sectionsRef.current[index] = el)}
+            data-index={index}
+            style={styles.fullScreenSection}
+          >
             <div
-              key={index}
-              className={`core-card ${show ? "show" : ""} card-${index}`}
+              style={{
+                ...styles.card,
+                ...styles[alignment],
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible
+                  ? "translateY(0px)"
+                  : alignment === "left"
+                  ? "translateX(-80px)"
+                  : alignment === "right"
+                  ? "translateX(80px)"
+                  : "translateY(60px)",
+              }}
             >
-              <img src={card.img} alt="" />
-              <div className="overlay">
-                <h4>{card.title}</h4>
+              <img src={card.img} alt="" style={styles.image} />
+              <div style={styles.overlay}>
+                <h3>{card.title}</h3>
               </div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </section>
   );
 }
+
+const styles = {
+  wrapper: {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+  },
+
+  heading: {
+    textAlign: "center",
+    padding: "120px 0 60px",
+    color: "#ffffff",
+    fontSize: "38px",
+  },
+
+  fullScreenSection: {
+    height: "100vh",
+    display: "flex",
+    alignItems: "center",
+  },
+
+  card: {
+    width: "650px",
+    height: "380px",
+    borderRadius: "24px",
+    overflow: "hidden",
+    background: "#ffffff",
+    boxShadow: "0 40px 80px rgba(0,0,0,0.35)",
+    transition: "all 0.9s cubic-bezier(0.22,1,0.36,1)",
+    position: "relative",
+  },
+
+  left: {
+    marginLeft: "120px",
+  },
+
+  center: {
+    margin: "0 auto",
+  },
+
+  right: {
+    marginLeft: "auto",
+    marginRight: "120px",
+  },
+
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+
+  overlay: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    padding: "30px",
+    background: "rgba(0,0,0,0.65)",
+    color: "#fff",
+    fontSize: "22px",
+  },
+};
 
 export default CoreCapabilities;

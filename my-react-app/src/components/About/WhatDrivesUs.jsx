@@ -19,56 +19,89 @@ function WhatDrivesUs() {
   ];
 
   return (
-    <section style={styles.section}>
-      <h2 style={styles.heading}>WHAT DRIVES US</h2>
+    <>
+      <section style={styles.section}>
+        <h2 style={styles.heading}>WHAT DRIVES US</h2>
 
-      <div style={styles.container}>
-        {items.map((item, index) => (
-          <div key={index} style={styles.card}>
-            <div style={styles.accent}></div>
-            <div>
-              <h3 style={styles.title}>{item.title}</h3>
-              <p style={styles.desc}>{item.desc}</p>
+        <div style={styles.container}>
+          {items.map((item, index) => (
+            <div key={index} className="drive-card">
+              <div className="green-line"></div>
+
+              <div>
+                <h3 style={styles.title}>{item.title}</h3>
+                <p style={styles.desc}>{item.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+
+      {/* Hover Styles */}
+      <style>{`
+        .drive-card {
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          background: #ffffff;
+          padding: 35px 40px;
+          margin-bottom: 30px;
+          border-radius: 10px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+          overflow: hidden;
+          transition: all 0.4s ease;
+        }
+
+        .drive-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .green-line {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 6px;
+          height: 0%;
+          background: #2ecc71;
+          transition: height 0.4s ease;
+        }
+
+        .drive-card:hover .green-line {
+          height: 100%;
+        }
+      `}</style>
+    </>
   );
 }
 
 const styles = {
   section: {
-    padding: "120px 80px",
+    padding: "160px 140px",
     background: "#f4f6f9",
   },
+
   heading: {
-    marginBottom: "60px",
+    fontSize: "40px",
+    fontWeight: "600",
+    marginBottom: "80px",
     color: "#0b2a5c",
   },
+
   container: {
-    maxWidth: "900px",
+    maxWidth: "1000px",
   },
-  card: {
-    display: "flex",
-    alignItems: "flex-start",
-    background: "#ffffff",
-    padding: "25px",
-    marginBottom: "25px",
-    borderRadius: "4px",
-    boxShadow: "0 5px 20px rgba(0,0,0,0.05)",
-  },
-  accent: {
-    width: "4px",
-    background: "#2ecc71",
-    marginRight: "20px",
-  },
+
   title: {
-    marginBottom: "5px",
+    fontSize: "22px",
+    marginBottom: "12px",
+    color: "#0b2a5c",
   },
+
   desc: {
+    fontSize: "18px",
     color: "#555",
-    lineHeight: "1.6",
+    lineHeight: "1.8",
   },
 };
 

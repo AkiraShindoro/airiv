@@ -1,11 +1,12 @@
 import serviceImg from "../../assets/services/our-service.png";
+
 function OurService() {
   return (
     <section style={styles.section}>
       <div style={styles.left}>
         <h2 style={styles.heading}>OUR SERVICE</h2>
 
-        <p style={styles.text}>
+        <p style={styles.lead}>
           Delivering technology-enabled solutions that combine innovation,
           operational excellence, and long-term value creation.
         </p>
@@ -28,36 +29,49 @@ function OurService() {
 const styles = {
   section: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    gridTemplateColumns: "1.2fr 1fr",   // 👈 more space to text
     alignItems: "center",
-    gap: "80px",
-    padding: "120px 80px",
+    gap: "120px",
+    padding: "160px 140px",            // 👈 more real estate
     background: "#ffffff",
   },
+
   left: {
-    maxWidth: "550px",
+    maxWidth: "700px",
   },
+
   heading: {
-    marginBottom: "20px",
+    fontSize: "42px",                  // 👈 bigger heading
+    fontWeight: "600",
+    marginBottom: "30px",
     color: "#0b2a5c",
   },
-  text: {
-    marginBottom: "20px",
-    lineHeight: "1.7",
-    color: "#555",
+
+  lead: {
+    fontSize: "20px",                  // 👈 stronger intro
+    lineHeight: "1.9",
+    color: "#333",
+    marginBottom: "30px",
   },
+
   list: {
     paddingLeft: "20px",
-    color: "#333",
-    lineHeight: "1.8",
+    fontSize: "18px",
+    lineHeight: "2",
+    color: "#444",
   },
+
   right: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
+
   image: {
-    width: "100%",
-    maxWidth: "420px",
+    width: "480px",                   // 👈 square size
+    height: "480px",                  // 👈 square
+    objectFit: "cover",
+    borderRadius: "24px",             // 👈 rounded corners
+    boxShadow: "0 30px 70px rgba(0,0,0,0.15)",
   },
 };
 

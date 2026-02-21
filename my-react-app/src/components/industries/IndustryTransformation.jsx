@@ -1,23 +1,51 @@
-import { useState } from "react";
-import img1 from "../../assets/industries/tol1.png";
-import img2 from "../../assets/industries/tol2.png";
-import img3 from "../../assets/industries/tol3.png";
-import img4 from "../../assets/industries/tol4.png";
-import img5 from "../../assets/industries/tol5.png";
+import { useState, useEffect } from "react";
+import abstractBg from "../../assets/industries/abstract.jpg";
 
 function IndustryTransformation() {
   const items = [
-    { image: img1, title: "Digital Modernization of Legacy systems" },
-    { image: img2, title: "Data driven decision enablement" },
-    { image: img3, title: "Automation of critical business processes" },
-    { image: img4, title: "Operational Resilience & scalability" },
-    { image: img5, title: "Secure & compliant technology foundations" },
+    {
+      title: "DOMAIN EXPERTISE",
+      desc: "Deep understanding of industry-specific challenges and workflows.",
+    },
+    {
+      title: "SCALABLE ARCHITECTURE",
+      desc: "Solutions designed to grow with your business.",
+    },
+    {
+      title: "SECURITY & COMPLIANCE",
+      desc: "Strong focus on reliability, governance, and risk management.",
+    },
+    {
+      title: "LONG-TERM PARTNERSHIP",
+      desc: "We work as an extension of your team, not just a vendor.",
+    },
+    {
+      title: "DIGITAL ACCELERATION",
+      desc: "Enabling rapid modernization through cloud and automation.",
+    },
   ];
 
   const [index, setIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      if (window.innerWidth <= 768) {
+        setVisibleCards(1);
+      } else if (window.innerWidth <= 1024) {
+        setVisibleCards(2);
+      } else {
+        setVisibleCards(3);
+      }
+    };
+
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+    return () => window.removeEventListener("resize", updateLayout);
+  }, []);
 
   const next = () => {
-    if (index < items.length - 3) {
+    if (index < items.length - visibleCards) {
       setIndex(index + 1);
     }
   };
@@ -28,94 +56,159 @@ function IndustryTransformation() {
     }
   };
 
+  const cardWidth = 100 / visibleCards;
+
   return (
-    <section style={styles.section}>
-      <h2 style={styles.heading}>INDUSTRY TRANSFORMATION</h2>
+    <>
+      <section style={styles.section} className="trans-section">
+        <h2 style={styles.heading}>INDUSTRY TRANSFORMATION</h2>
 
-      <p style={styles.intro}>
-        We help organizations accelerate transformation through intelligent
-        technologies and strategic modernization initiatives.
-      </p>
+        <p style={styles.intro}>
+          We help organizations accelerate transformation through intelligent
+          technologies and strategic modernization initiatives.
+        </p>
 
-      <div style={styles.wrapper}>
-        <button onClick={prev} style={styles.arrow}>‹</button>
+        <div style={styles.wrapper}>
+          <button onClick={prev} style={styles.arrow}>‹</button>
 
-        <div style={styles.slider}>
-          <div
-            style={{
-              ...styles.inner,
-              transform: `translateX(-${index * 33.33}%)`,
-            }}
-          >
-            {items.map((item, i) => (
-              <div key={i} style={styles.card}>
-                <img src={item.image} alt="" style={styles.image} />
-                <h3 style={styles.title}>{item.title}</h3>
-              </div>
-            ))}
+          <div style={styles.slider}>
+            <div
+              style={{
+                ...styles.inner,
+                transform: `translateX(-${index * cardWidth}%)`,
+              }}
+            >
+              {items.map((item, i) => (
+                <div
+                  key={i}
+                  className="trans-card"
+                  style={{
+                    flex: `0 0 ${cardWidth}%`,
+                    backgroundImage: `url(${abstractBg})`,
+                  }}
+                >
+                  <div style={styles.overlay}>
+                    <h3 style={styles.title}>{item.title}</h3>
+                    <p style={styles.desc}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <button onClick={next} style={styles.arrow}>›</button>
-      </div>
-    </section>
+          <button onClick={next} style={styles.arrow}>›</button>
+        </div>
+      </section>
+
+      <style>{`
+        .trans-card {
+          margin-right: 25px;
+          height: 320px;
+          border-radius: 16px;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.35s ease;
+        }
+
+        .trans-card:hover {
+          transform: translateY(-8px);
+        }
+
+        @media (max-width: 1024px) {
+          .trans-section {
+            padding: 100px 60px !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .trans-section {
+            padding: 70px 25px !important;
+          }
+
+          .trans-card {
+            height: 260px !important;
+            margin-right: 15px !important;
+          }
+        }
+      `}</style>
+    </>
   );
 }
 
 const styles = {
   section: {
-    padding: "120px 80px",
+    padding: "140px 120px",
     background: "#ffffff",
     textAlign: "center",
   },
+
   heading: {
+    fontSize: "32px",
     marginBottom: "20px",
     color: "#0b2a5c",
+    fontWeight: "600",
   },
+
   intro: {
-    maxWidth: "700px",
+    maxWidth: "750px",
     margin: "0 auto 60px",
     color: "#555",
-    lineHeight: "1.7",
+    fontSize: "18px",
+    lineHeight: "1.8",
   },
+
   wrapper: {
     display: "flex",
     alignItems: "center",
-    gap: "20px",
+    gap: "30px",
   },
+
   slider: {
     overflow: "hidden",
     width: "100%",
   },
+
   inner: {
     display: "flex",
-    transition: "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
+    transition: "transform 0.8s cubic-bezier(0.22,1,0.36,1)",
   },
-  card: {
-    flex: "0 0 33.33%",
-    background: "#f4f6f9",
-    padding: "30px",
-    marginRight: "20px",
-    borderRadius: "8px",
+
+  overlay: {
+    position: "absolute",
+    inset: 0,
+    padding: "40px 30px",
+    background:
+      "linear-gradient(to bottom right, rgba(11,42,92,0.9), rgba(11,42,92,0.7))",
+    color: "#ffffff",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    textAlign: "left",
   },
-  image: {
-    width: "100%",
-    height: "200px",
-    objectFit: "cover",
-    marginBottom: "20px",
-    borderRadius: "6px",
-  },
+
   title: {
-    marginBottom: "10px",
+    fontSize: "20px",
+    fontWeight: "600",
+    marginBottom: "15px",
+    letterSpacing: "0.5px",
   },
+
+  desc: {
+    fontSize: "16px",
+    lineHeight: "1.7",
+  },
+
   arrow: {
     background: "#0b2a5c",
     color: "#fff",
     border: "none",
-    fontSize: "22px",
-    width: "40px",
-    height: "40px",
+    fontSize: "26px",
+    width: "48px",
+    height: "48px",
     cursor: "pointer",
+    borderRadius: "8px",
   },
 };
 
