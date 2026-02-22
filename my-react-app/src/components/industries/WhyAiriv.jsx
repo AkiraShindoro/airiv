@@ -7,43 +7,17 @@ function WhyAiriv() {
   ];
 
   return (
-    <section style={styles.section}>
-      <h2 style={styles.heading}>WHY AIRIV INFOTECH</h2>
+    <section className="why-section">
+      <h2 className="why-heading">WHY AIRIV INFOTECH</h2>
 
-      <div style={styles.grid}>
+      <div className="why-grid">
         {points.map((point, index) => (
-          <div key={index} style={styles.card}>
-            <p style={styles.text}>{point}</p>
+          <div key={index} className="why-card">
+            <p className="why-text">{point}</p>
           </div>
         ))}
       </div>
     </section>
   );
 }
-
-const styles = {
-  section: {
-    padding: "120px 80px",
-    background: "#0b2a5c",
-    color: "#ffffff",
-    textAlign: "center",
-  },
-  heading: {
-    marginBottom: "60px",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4,1fr)",
-    gap: "30px",
-  },
-  card: {
-    background: "rgba(255,255,255,0.08)",
-    padding: "30px",
-    borderRadius: "8px",
-  },
-  text: {
-    lineHeight: "1.6",
-  },
-};
-
 export default WhyAiriv;

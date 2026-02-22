@@ -14,15 +14,13 @@ function Services() {
 ];
 
   return (
-    <section id="services">
-      <h2 style={{ textAlign: "center", marginBottom: "40px" }}>
-        OUR SERVICES
-      </h2>
+    <section id="services" className="services-section">
+      <h2 className="services-heading">OUR SERVICES</h2>
 
-      <div style={styles.grid}>
+      <div className="services-grid">
         {items.map((item) => (
-          <div key={item.title} style={styles.card}>
-            <img src={item.img} style={styles.img} />
+          <div key={item.title} className="service-card">
+            <img src={item.img} alt={item.title} />
             <h4>{item.title}</h4>
           </div>
         ))}
@@ -30,28 +28,5 @@ function Services() {
     </section>
   );
 }
-
-
-
-
-const styles = {
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(5, 1fr)",
-    gap: "20px",
-  },
-  card: {
-    background: "#203a60",
-    color: "#fff",
-    padding: "30px",
-    minHeight: "260px",
-  },
-  img: {
-  width: "100%",
-  height: "140px",
-  objectFit: "cover",
-  marginBottom: "16px",
-},
-};
 
 export default Services;

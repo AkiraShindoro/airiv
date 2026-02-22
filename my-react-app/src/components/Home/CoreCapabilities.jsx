@@ -43,13 +43,8 @@ function CoreCapabilities() {
   }, []);
 
   return (
-    <section
-      style={{
-        ...styles.wrapper,
-        backgroundImage: `url(${bgImg})`,
-      }}
-    >
-      <h2 style={styles.heading}>OUR CORE CAPABILITIES</h2>
+    <section className="core-wrapper" style={{ backgroundImage: `url(${bgImg})` }}>
+      <h2 className="core-heading">OUR CORE CAPABILITIES</h2>
 
       {cards.map((card, index) => {
         const alignment = alignmentPattern[index];
@@ -60,12 +55,11 @@ function CoreCapabilities() {
             key={index}
             ref={(el) => (sectionsRef.current[index] = el)}
             data-index={index}
-            style={styles.fullScreenSection}
+            className="core-fullscreen"
           >
             <div
+              className={`core-card ${alignment === 'left' ? 'core-left' : alignment === 'right' ? 'core-right' : 'core-center'}`}
               style={{
-                ...styles.card,
-                ...styles[alignment],
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible
                   ? "translateY(0px)"
@@ -76,8 +70,8 @@ function CoreCapabilities() {
                   : "translateY(60px)",
               }}
             >
-              <img src={card.img} alt="" style={styles.image} />
-              <div style={styles.overlay}>
+              <img src={card.img} alt="" />
+              <div className="core-overlay">
                 <h3>{card.title}</h3>
               </div>
             </div>
@@ -87,66 +81,4 @@ function CoreCapabilities() {
     </section>
   );
 }
-
-const styles = {
-  wrapper: {
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed",
-  },
-
-  heading: {
-    textAlign: "center",
-    padding: "120px 0 60px",
-    color: "#ffffff",
-    fontSize: "38px",
-  },
-
-  fullScreenSection: {
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-  },
-
-  card: {
-    width: "650px",
-    height: "380px",
-    borderRadius: "24px",
-    overflow: "hidden",
-    background: "#ffffff",
-    boxShadow: "0 40px 80px rgba(0,0,0,0.35)",
-    transition: "all 0.9s cubic-bezier(0.22,1,0.36,1)",
-    position: "relative",
-  },
-
-  left: {
-    marginLeft: "120px",
-  },
-
-  center: {
-    margin: "0 auto",
-  },
-
-  right: {
-    marginLeft: "auto",
-    marginRight: "120px",
-  },
-
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-
-  overlay: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    padding: "30px",
-    background: "rgba(0,0,0,0.65)",
-    color: "#fff",
-    fontSize: "22px",
-  },
-};
-
 export default CoreCapabilities;
